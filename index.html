@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+<style>
+body{
+	background-image: url("racing.gif");
+    background-position: center;
+    background-size: cover;
+}
+#myCanvas
+{
+	border-width:10px;
+	background-color: white; 
+	border-style:ridge;
+}
+
+h1,h4
+{
+	color: white !important;
+}
+</style>		
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<title>C-84</title>
+</head>
+<body onload="add()">
+<center>
+<h1 style="color: red;">Car Racing</h1>
+<h1 style="color: red;">Game Status <span id="game_status"></span></h1>
+<canvas id="myCanvas" width="800" height="600"></canvas>
+<h4>
+
+<b class="text-danger">	NOTE : </b> IF CAR IS NOT VISIBLE PRESS ANY ARROW KEY
+</h4>
+
+</center>
+<script>
+  //canvas code
+	canvas=document.getElementById("myCanvas")
+ctx=canvas.getContext("2d")
+//car 1 code
+car1_width = 120;
+car1_height = 70;
+car1_image = "car1.png"
+car1_x = 10;
+car1_y = 10;
+//car 2 code
+car2_width = 120;
+car2_height = 70;
+car2_image = "car2.png"
+car2_x = 10;
+car2_y = 100;
+//canvas
+backgroundImage= "racing.jpg"
+function add(){
+    backgroundImageTag = new Image()
+    backgroundImageTag.onLoad=uploadBackground
+    backgroundImageTag.src=backgroundImage
+    car1_imageTag = new Image()
+    car1_imageTag.onLoad=uploadcar1
+    car1_imageTag.src=car1_image 
+    //car 2
+    car2_imageTag = new Image()
+    car2_imageTag.onLoad=uploadcar2
+    car2_imageTag.src=car2_image
+}
+function uploadBackground(){
+    ctx.drawImage(backgroundImageTag,0,0,canvas.width,canvas.height)
+}
+function uploadcar1(){
+    ctx.drawImage(car1_imageTag, car1_x, car1_y, car1_width, car1_height)
+}
+function uploadcar2(){
+    ctx.drawImage(car2_imageTag, car2_x, car2_y, car2_width, car2_height)
+}
+window.addEventListener("keyDown",MyKeyDown)
+function MyKeyDown(e){
+keyPressed=e.keyCode
+console.log(keyPressed)
+if (keyPressed == '38'){
+ up()
+ console.log("Up_Is_Pressed")
+
+} 
+if (keyPressed == '40'){
+    down()
+    console.log("Down_Is_Pressed")
+}
+    if (keyPressed == '37'){
+        left()
+        console.log("Left_Is_Pressed")
+           
+       }
+       if (keyPressed == '39'){
+        right()
+        console.log("Right_Is_Pressed")
+           
+       }
+       
+  
+}
+function up(){
+  if (rover_y >= 0){
+   rover_y = rover_y-10
+   console.log("WhenUpIsPressed,x="+rover_x+"y="+rover_y)   
+   uploadBackground()
+   uploadRover()
+  }  
+}
+function down(){
+    if (rover_y <= 500){
+     rover_y = rover_y+10
+     console.log("WhenDownIsPressed,x="+rover_x+"y="+rover_y)   
+     uploadBackground()
+     uploadRover()
+    }  
+  }
+  function left(){
+    if (rover_x >= 0){
+     rover_x = rover_x-10
+     console.log("WhenLeftIsPressed,x="+rover_x+"y="+rover_y)   
+     uploadBackground()
+     uploadRover()
+    }  
+  }
+  function right(){
+    if (rover_x <= 700){
+     rover_x = rover_x+10
+     console.log("WhenRightIsPressed,x="+rover_x+"y="+rover_y)   
+     uploadBackground()
+     uploadRover()
+    }  
+  }
+</script>
+</body>
+</html>
